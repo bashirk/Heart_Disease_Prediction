@@ -5,7 +5,7 @@ steps:
 - task: DotNetCoreInstaller@0
   inputs:
     packageType: 'sdk'
-    version: '2.*'
+    version: '2.2.402'
 
 
 
