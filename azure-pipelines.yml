@@ -1,72 +1,51 @@
-# Build CI pipeline for ML.NET model, its trainer app and end-user WebAPI service
-
-trigger:
-- master
-
-# Microsoft hosted agent
 pool:
-  vmImage: 'macOS-10.14'
-
-# Custom self-hosted agent (Azure VM with Azure DevOps Agent)
-#pool:
-#  name: Default
-
-variables:
-  buildConfiguration: 'Release'
+ vmImage: 'windows-2019'
 
 steps:
+- task: DotNetCoreInstaller@0
+  inputs:
+    packageType: 'sdk'
+    version: '2.2.0'
 
-- script: 'if not exist X:\ (net use X: \\mlnetfilestorage.file.core.windows.net\datasets /u:mlnetfilestorage $(mlnetfilestorage.key))'
-  displayName: 'Map disk drive to Azure Files share folder'
 
-- script: dotnet build MLModel.Train/SentimentModel/SentimentModel.ConsoleApp/SentimentModel.ConsoleApp.csproj --configuration $(buildConfiguration)
-  displayName: 'Build Trainer Console App (dotnet build) $(buildConfiguration)'
 
-- script: dotnet run --project MLModel.Train/SentimentModel/SentimentModel.ConsoleApp/SentimentModel.ConsoleApp.csproj --configuration $(buildConfiguration)
-  displayName: 'Train ML model (dotnet run)'
+- script: dotnet restore
 
-# Train running .dll instead of using 'dotnet run'
-#- task: DotNetCoreCLI@2
-#  displayName: 'Train ML model (Task)'
-#  inputs:
-#    command: custom
-#    custom: SentimentModel.ConsoleApp.dll
-#    workingDirectory: MLModel.Train/SentimentModel/SentimentModel.ConsoleApp/bin/Release/netcoreapp2.1
-
-- script: dotnet build MLModel.Train/UnitTests/UnitTests.csproj --configuration $(buildConfiguration)
-  displayName: 'Build Test project for ML Model (dotnet build) $(buildConfiguration)'
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Run Unit Tests using trained ML model'
-  inputs:
-    command: test
-    projects: '**/UnitTests.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-
-- task: CopyFiles@2
-  displayName: 'Copy ML model file from Trainer app to WebAPI app'
-  inputs:
-    SourceFolder: 'MLModel.Train/SentimentModel/SentimentModel.Model'
-    Contents: 'MLModel.zip'
-    TargetFolder: 'Scalable.WebAPI/ML'
-    OverWrite: true
-
-- script: dotnet build Scalable.WebAPI/Scalable.WebAPI.csproj --configuration $(buildConfiguration)
-  displayName: 'Build WebAPI service (dotnet build) $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Generate WebAPI binaries (dotnet publish)'
   inputs:
     command: publish
-    publishWebProjects: false
-    projects: Scalable.WebAPI/Scalable.WebAPI.csproj
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    modifyOutputPath: false
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
 
-- task: PublishPipelineArtifact@0
-  displayName: 'Publish WebAPI as pipeline artifact'
+# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+- task: PublishBuildArtifacts@1
   inputs:
-    artifactName: MLNETWebAPI
-    targetPath: '$(Build.ArtifactStagingDirectory)'
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'PredictHeartDiseases'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
 
+- task: PublishBuildArtifacts@1
+  displayName: 'publish artifacts'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Visual Studio Enterprise(f2043603-821e-4fe0-b11d-d9f5655033b1)'
+    appType: 'webApp'
+    WebAppName: 'PredictHeartDiseases'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'MLNetResource'
+    SlotName: 'production'
+    packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
+    enableCustomDeployment: true
+    DeploymentType: 'webDeploy'
