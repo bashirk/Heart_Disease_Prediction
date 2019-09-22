@@ -9,17 +9,15 @@ The problem (that this solution has been created to address) is centered around 
 In order to solve this problem, we built an ML model that takes 14 columns of data from the user - as inputs, 13 of these columns are independent, while the remaining 1 column - the 'Label' column - is what is being predicted, and as well gives the predicted result. 
 
 ## Dataset
-To every ML project, there is always a dataset to build upon. And for this project, we have used a '[Training Data]' (https://github.com/bashirk/Heart_Disease_Prediction/blob/master/Heart_Disease_Prediction/ML_Model/Data/HeartTraining.csv) downloaded from the open [UCI ML Repository] (https://archive.ics.uci.edu/ml/datasets/Heart+Disease)
-
-[GitHub Pages](https://pages.github.com/)
+To every ML project, there is always a dataset to build upon. And for this project, we have used a '[Training Data](https://github.com/bashirk/Heart_Disease_Prediction/blob/master/Heart_Disease_Prediction/ML_Model/Data/HeartTraining.csv)' downloaded from the open [UCI ML Repository](https://archive.ics.uci.edu/ml/datasets/Heart+Disease)
 
 ## Solution
 
 How did we go ahead in solving this problem? 
 
--First, we created an ASP.NET Core MVC Web application via Visual Studio 2019. 
--Then we installed prerequisite packages from NuGet manager. 
--Next, we built an ML model for Heart Disease Prediction. 
--Thereafter, we trained the model on existing data using the dataset above. 
--Lastly, we consumed the model in our .NET Core application to predict if the heart disease is present for any given data by the user.
+- First, we created an ASP.NET Core MVC Web application via Visual Studio 2019. 
+- Then we installed prerequisite packages from NuGet manager. 
+- Next, we built an ML model for Heart Disease Prediction. 
+- Thereafter, we trained the model on existing data using the dataset above. 
+- Lastly, we consumed the model in our .NET Core application to predict if the heart disease is present for any given data by the user.
  
