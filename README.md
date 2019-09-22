@@ -9,7 +9,7 @@ The problem (that this solution has been created to address) is centered around 
 In order to solve this problem, we built an ML model that takes 14 columns of data from the user - as inputs, 13 of these columns are independent, while the remaining 1 column - the 'Label' column - is what is being predicted, and as well gives the predicted result. 
 
 ## Dataset
-To every ML project, there is always a dataset to build upon. And for this project, we have used a '[Training Data](https://github.com/bashirk/Heart_Disease_Prediction/blob/master/Heart_Disease_Prediction/ML_Model/Data/HeartTraining.csv)' downloaded from the open [UCI ML Repository](https://archive.ics.uci.edu/ml/datasets/Heart+Disease)
+To every ML project, there is always a dataset to build upon. And for this project, we have used a '[Training Data](https://github.com/bashirk/Heart_Disease_Prediction/blob/master/Heart_Disease_Prediction/ML_Model/Data/HeartTraining.csv)' downloaded from the open [UCI ML Repository](https://archive.ics.uci.edu/ml/datasets/Heart+Disease) - which contains real-life data from 300+ patients.
 
 ## Solution
 
@@ -21,3 +21,9 @@ How did we go ahead in solving this problem?
 - Thereafter, we trained the model on existing data using the dataset above. 
 - Lastly, we consumed the model in our .NET Core application to predict if the heart disease is present for any given data by the user.
  
+### How to setup this project locally
+
+Prerequisites
+Visual Studio (I'm using VS2019)
+.NET Core 2.1 or > 2.1 SDK
+Basic understanding of ASP.NET MVC or ASP.NET Core MVC
