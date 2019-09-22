@@ -29,7 +29,8 @@ How did we go ahead in solving this problem?
     Web Browser (We used Microsoft Edge)
     
 ## Setup Instructions
-1. Clone this repository
+
+ 1. Clone this repository
 2. Open Visual Studio, click "Open" and locate the folder of the cloned repository.
 3. Next, you should see a folder - with the project name "Heart_Disease_Prediction" - and a file as well, named "Heart_Disease_Prediction.sln" (notice the file extension .sln), this is the backbone of the .NET project.
 4. Then, click on this .sln file, and click 'Open'. This would import the entire project into Visual Studio.
