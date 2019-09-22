@@ -21,9 +21,9 @@ How did we go ahead in solving this problem?
 - Thereafter, we trained the model on existing data using the dataset above. 
 - Lastly, we consumed the model in our .NET Core application to predict if the heart disease is present for any given data by the user.
  
-### How to setup this project locally
+## How to setup this project locally
 
-Prerequisites
-Visual Studio (I'm using VS2019)
-.NET Core 2.1 or > 2.1 SDK
-Basic understanding of ASP.NET MVC or ASP.NET Core MVC
+### Prerequisites
+    Visual Studio (I'm using VS2019)
+    .NET Core 2.1 or > 2.1 SDK
+    Basic understanding of ASP.NET MVC or ASP.NET Core MVC
