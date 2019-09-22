@@ -11,6 +11,8 @@ In order to solve this problem, we built an ML model that takes 14 columns of da
 ## Dataset
 To every ML project, there is always a dataset to build upon. And for this project, we have used a '[Training Data]' (https://github.com/bashirk/Heart_Disease_Prediction/blob/master/Heart_Disease_Prediction/ML_Model/Data/HeartTraining.csv) downloaded from the open [UCI ML Repository] (https://archive.ics.uci.edu/ml/datasets/Heart+Disease)
 
+[GitHub Pages](https://pages.github.com/)
+
 ## Solution
 
 How did we go ahead in solving this problem? 
