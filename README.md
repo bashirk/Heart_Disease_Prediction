@@ -21,9 +21,31 @@ How did we go ahead in solving this problem?
 - Thereafter, we trained the model on existing data using the dataset above. 
 - Lastly, we consumed the model in our .NET Core application to predict if the heart disease is present for any given data by the user.
  
-## How to setup this project locally
+# How to setup this project locally
 
 ### Prerequisites
-    Visual Studio (I'm using VS2019)
-    .NET Core 2.1 or > 2.1 SDK
-    Basic understanding of ASP.NET MVC or ASP.NET Core MVC
+    Visual Studio (We used VS2019)
+    .NET Core 2.2 or > 2.2 SDK
+    Web Browser (We used Microsoft Edge)
+    
+## Setup Instructions
+1. Clone this repository
+2. Open Visual Studio, click "Open" and locate the folder of the cloned repository.
+3. Next, you should see a folder - with the project name "Heart_Disease_Prediction" - and a file as well, named "Heart_Disease_Prediction.sln" (notice the file extension .sln), this is the backbone of the .NET project.
+4. Then, click on this .sln file, and click 'Open'. This would import the entire project into Visual Studio.
+5. The build process for the project would start immediately.
+6. When this build process is completed, click the Play icon to rebuild and run the project.
+7. When this is done, VS2019 will automatically trigger another tab activity in your default browser - and eventually load up the project.
+8. If this isn't done by VS, you can manually type in the localhost address to access the project in your browser.
+
+#### Local Deployment
+
+https://localhost:5001/
+
+# Team HackSaw
+Here are the team 
+
+## Team Members
+- Korede Bashir
+- Oluwaseyi Ayodele
+- Ayobami Ogunlade
